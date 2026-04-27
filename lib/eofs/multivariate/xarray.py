@@ -22,7 +22,7 @@ class MultivariateEOF:
         # The solver will be from xarray.py for single variable and accept input of data
         self._solver = xarray.Eof(data)
 
-        self.neofs = self.solver.neofs
+        self.neofs = self._solver.neofs
 
 
     def _merge_fields(self, fields):
@@ -68,17 +68,30 @@ class MultivariateEOF:
 
         
         except ValueError: # For when the time dims don't match. Required for function.
-            raise ValueError("All fields must have the same first dimension 'time' ")
+            raise ValueError("All fields must have the same first dimension (time)")
 
 
         return merged, info
 
 
 
-    #def eofs(self, ):
+    def _unwrap(self, modes):
+
+        nmodes = modes.shape[0]
+        # modeset = 
+        # return modeset
+    
+
+    def eofs(self, eofscaling=0, neofs=None):
+
+
+        modes = self._solver.eofs(eofscaling, neofs)
+        return self._unwrap(modes)
 
 
 
-    #def eigenvalues(self, ):
+    def eigenvalues(self, neighs=None):
 
+
+        return self._solver.eigenvalues()
 
