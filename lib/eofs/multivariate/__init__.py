@@ -26,3 +26,10 @@ try:
     __all__.append('iris')
 except ImportError:
     pass
+    
+try:
+    from . import xarray
+    __all__.append('xarray')
+except ImportError:
+    pass
+
