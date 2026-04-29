@@ -11,14 +11,13 @@ class MultivariateEOF:
     '''Multivariate Empirical Orthoganal Functions for xarray format'''
 
 
-    # For now, I will likely not use weights, center, or ddof but may be added later.
     def __init__(self, datasets, weights=None,center=True, ddof=1):
         '''
 
         Inputs:
 
         *Datasets*
-            Takes in a list of xarray "DataArrays". The first dimension of the array
+            Takes in a list of xarray DataArrays. The first dimension of the array
             must represent a time series.
 
         *weights*
@@ -86,14 +85,15 @@ class MultivariateEOF:
             regarding how the input fields were concatenated. Variable 1 will come first
             in the list for shapes and slicers respectively. Field #1 slice will go
             from 0 to channels (the product of the non-time dimensions). Field 2 slice
-            will go from then until there plus channels for field 2
+            will go from there plus channels for field 2.
         
         '''
 
-        # Def info dict to fill with shape and slice info
+        # Def info dictionary to fill with shape and slice info
         info = {'shapes': [], 'slicers': []}
         islice = 0
         
+
         # Make storage list for (time,space) fields
         flattened_fields = []
 
@@ -126,7 +126,7 @@ class MultivariateEOF:
 
 
         try:
-            #Merge the fields together
+            # Merge the fields together
             merged = xr.concat( flattened_fields, dim = 'space')
 
         
@@ -155,7 +155,7 @@ class MultivariateEOF:
         Due to currently unfunctional _unwrap, eofs does not hold functionality.
 
         eofs woulld be responsible for calculating the Empirical Orthogonal Functions
-        (EOFs) as an order xarray DataArray.
+        (EOFs) as an ordered xarray DataArray.
 
         eofs calls the modes determined by __init__ solver to calculate the associated
         EOFs
@@ -177,7 +177,7 @@ class MultivariateEOF:
 
         *eigenvalues*
             eigenvalues will return as an xarray DataArray calculated from the solver
-            set by the __init__
+            set by __init__
         
         '''
 
